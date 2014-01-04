@@ -10,24 +10,34 @@ module.exports = function(grunt) {
             install: {
                 options: {
                     targetDir: 'bower_components',
-                    copy: false
+                    copy: false,
+                    cleanTargetDir: true
                 }
-            }
-        },
-        ngmin: {
-            app: {
-                src: [ 'lib/**/*.js' ],
-                dest: 'build/app.js'
             }
         },
         copy: {
             app: {
-                files: [{
-                    expand: true,
-                    flatten: true,
-                    src: [ 'lib/partials/*' ],
-                    dest: 'public/partials/'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: [ 'public/*' ],
+                        dest: 'dist/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: [ 'public/img/*' ],
+                        dest: 'dist/img/'
+                    },
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: [ 'lib/partials/*' ],
+                        dest: 'dist/partials/'
+                    }
+                ]
             }
         },
         less: {
@@ -37,16 +47,22 @@ module.exports = function(grunt) {
                 }
             }
         },
-         cssmin : {
+        cssmin : {
             app: {
                 src: 'build/app.css',
-                dest: 'public/css/app.min.css'
+                dest: 'dist/css/app.min.css'
+            }
+        },
+        ngmin: {
+            app: {
+                src: [ 'lib/**/*.js' ],
+                dest: 'build/app.js'
             }
         },
         uglify: {
             app: {
                 files: {
-                    'public/js/app.min.js': [
+                    'dist/js/app.min.js': [
                         'bower_components/jquery/jquery.js',
                         'bower_components/angular/angular.js',
                         'bower_components/angular-route/angular-route.js',
@@ -68,20 +84,18 @@ module.exports = function(grunt) {
                 }
             }
         },
+        clean: {
+            dist: [ 'dist' ],
+            build: [ 'build' ]
+        },
         watch: {
             less: {
                 files:  [ 'less/**/*' ],
-                tasks:  [ 'build', 'express:dev' ],
-                options: {
-                    spawn: false
-                }
+                tasks:  [ 'build' ]
             },
             lib: {
                 files:  [ 'lib/**/*' ],
-                tasks:  [ 'build', 'express:dev' ],
-                options: {
-                    spawn: false
-                }
+                tasks:  [ 'build' ]
             }
         }
     });
@@ -93,13 +107,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('install', [ 'bower:install' ]);
-    grunt.registerTask('build', [ 'copy', 'less', 'cssmin', 'ngmin', 'uglify' ]);
-
-    grunt.registerTask('bootstrap', [ 'install', 'build' ]);
-
-    grunt.registerTask('server', [ 'install', 'build', 'express:dev' ]);
+    grunt.registerTask('build', [ 'clean:dist', 'copy', 'less', 'cssmin', 'ngmin', 'uglify', 'clean:build' ]);
+    grunt.registerTask('dist', [ 'install', 'build' ]);
+    grunt.registerTask('server', [ 'dist', 'express:dev' ]);
     grunt.registerTask('dev', [ 'server', 'watch' ]);
 };
