@@ -1,8 +1,5 @@
 # Application
-/build
-/public/css
-/public/js
-/public/partials
+/dist
 
 # NodeJS
 /node_modules
