@@ -1,0 +1,11 @@
+# Application
+/build
+/public/css
+/public/js
+/public/partials
+
+# NodeJS
+/node_modules
+
+# Bower
+/bower_components

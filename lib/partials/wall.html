@@ -1,0 +1,42 @@
+<div
+    id="repositories"
+    masonry
+    preserve-order
+    item-selector=".repository"
+    masonry-options="{ transitionDuration: '1.5s' }"
+>
+    <div
+        class="repository"
+        ng-repeat="repository in user.repositories.all | orderBy: [ '-buildStatusCode', '-buildFinishedAt.unix()' ]"
+        masonry-brick
+    >
+        <div class="repository-container repository-status-{{ repository.buildStatus }}">
+            <div class="repository-title">
+                <a class="repository-number" href="{{ repository.buildUrl }}">#{{ repository.buildNumber }}</a>
+                <a class="repository-slug" href="{{ repository.travisUrl }}">{{ repository.slug }}</a>
+            </div>
+
+            <div class="repository-metadata" ng-show="repository.buildFinishedAt && repository.buildDuration">
+                <span class="repository-build-finished-at" >
+                    {{ repository.buildHumanFinishedAt }}
+                </span>
+
+                <span class="repository-build-duration">
+                    - {{ repository.buildHumanDuration }}
+                </span>
+            </div>
+
+            <div class="repository-metadata" ng-show="repository.buildStatusCode === 1">
+                <div class="repository-unknown">Unknown status</div>
+            </div>
+
+            <div class="repository-metadata" ng-show="repository.buildStatusCode === 3">
+                <div class="repository-building">Building...</div>
+            </div>
+
+            <a class="repository-github" href="{{ repository.githubUrl }}">
+                <img src="/img/github.png" alt="GitHub" />
+            </a>
+        </div>
+    </div>
+</div>

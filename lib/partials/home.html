@@ -1,0 +1,84 @@
+<a href="http://github.com/egeloen/travis-wall">
+    <img
+        class="github-ribbon github-ribbon-left"
+        src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"
+        alt="Fork me on GitHub"
+    />
+</a>
+
+<a href="http://github.com/egeloen/travis-wall">
+    <img
+        class="github-ribbon github-ribbon-right"
+        src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
+        alt="Fork me on GitHub"
+    />
+</a>
+
+<div id="container">
+    <header>
+        <img class="travis-logo" src="/img/travis.png" alt="Travis" />
+        <h1>Travis Wall</h1>
+        <em>
+            I'm is a <a href="http://en.wikipedia.org/wiki/Software_as_a_service">SaaS</a> which gives you feedbacks about
+            your <a href="https://travis-ci.org/">Travis</a>!
+        </em>
+    </header>
+
+    <section id="content">
+        <p>
+            Hey everyone! I'm Travis Wall, an Open Source project firstly built to discover
+            <a href="http://angularjs.org/">AngularJS</a> to <a href="http://egeloen.fr/">Eric GELOEN</a> (my creator) but
+            at the end, I was so pretty and amazing than he has decided to make me discover the world!
+        </p>
+
+        <h2>What's inside?</h2>
+        <p>
+            I was built around many technologies but the most important ones are: <a href="http://angularjs.org/">AngularJS</a>,
+            <a href="http://masonry.desandro.com/">Masonry</a>, <a href="http://momentjs.com/">MomentJS</a>,
+            <a href="http://lesscss.org/">Less</a>, <a href="http://lesshat.com/">LessHat</a>,
+            <a href="http://necolas.github.io/normalize.css/">Normalize CSS</a>, <a href="http://bower.io/">Bower</a>,
+            <a href="http://gruntjs.com/">Grunt</a> and many others...
+        </p>
+
+        <h2>Give it a try...</h2>
+        <p>Enter your Travis username and start monitoring your projects!</p>
+
+        <form name="loginForm" novalidate ng-submit="login(user)">
+            <input
+                name="username"
+                type="text"
+                placeholder="Travis username..."
+                autocomplete="off"
+                required
+                ng-model="user.username"
+                ng-travis-user
+            />
+
+            <span ng-show="loginForm.username.$dirty && loginForm.username.$error.travis">
+                It seems the user does not exist or there is simply no repo(s) to monitor...
+            </span>
+
+            <span ng-show="loginForm.username.$dirty && loginForm.username.$processing">
+                Checking...
+            </span>
+
+            <span ng-show="loginForm.$valid && !loginForm.username.$detection && !loginForm.username.$processing">
+                Let's go!
+            </span>
+
+            <button
+                type="submit"
+                ng-show="loginForm.$valid && !loginForm.username.$detection && !loginForm.username.$processing"
+            >
+                Monitor
+            </button>
+        </form>
+
+        <h2>License</h2>
+        <p>
+            Travis Wall is released under the MIT license. For the full copyright and license information, please read the
+            <a href="https://github.com/egeloen/travis-wall/blob/master/LICENSE">LICENSE file</a> that was distributed with
+            the source code.
+        </p>
+    </section>
+</div>

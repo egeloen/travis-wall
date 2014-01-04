@@ -1,0 +1,93 @@
+@import '../bower_components/lesshat/build/lesshat.less';
+@import 'variables.less';
+
+@repository-guttle: 10px;
+@repository-radius: @repository-guttle / 2;
+@repository-shadow: 1px 1px 12px #555;
+@repository-gradient: 10%;
+
+@repository-building-color: #ff0;
+@repository-unknown-color: #fff;
+@repository-failed-color: #ff3019;
+@repository-passed-color: #25cc00;
+
+.repository-status (@color) {
+    background-color: @color;
+    .background-image(linear-gradient(to bottom, @color, darken(@color, @repository-gradient)));
+}
+
+#repositories {
+    margin: @repository-guttle;
+
+    a {
+        text-decoration: none;
+        color: @color;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.repository,
+.repository-container {
+    padding: @repository-guttle;
+}
+
+.repository {
+    float: left;
+}
+
+.repository-container {
+    .border-radius(@repository-radius);
+    .box-shadow(@repository-shadow);
+}
+
+.repository-status-building {
+    .repository-status(@repository-building-color);
+}
+
+.repository-status-unknown {
+    .repository-status(@repository-unknown-color);
+}
+
+.repository-status-failed {
+    .repository-status(@repository-failed-color);
+}
+
+.repository-status-passed {
+    .repository-status(@repository-passed-color);
+}
+
+.repository-slug {
+    font-weight: bold;
+}
+
+.repository-metadata {
+    font-size: @font-size - 1px;
+    font-style: italic;
+}
+
+.repository-build-finished-at,
+.repository-building,
+.repository-unknown {
+    padding-left: 20px;
+}
+
+.repository-build-finished-at {
+    background: url('/img/time.png') no-repeat;
+}
+
+.repository-building {
+    background: url('/img/build.png') no-repeat 0 2px;
+}
+
+.repository-unknown {
+    background: url('/img/unknown.png') no-repeat 4px 2px;
+}
+
+.repository-github {
+    position: absolute;
+    right: @repository-guttle * 2;
+    top: @repository-guttle * 2;
+}
