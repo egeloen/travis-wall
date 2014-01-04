@@ -21,7 +21,7 @@ process and many other processes are managed by [Grunt](http://gruntjs.com/), a 
 [NodeJS](http://nodejs.org):
 
 ``` bash
-$ grunt build
+$ grunt dist
 ```
 
 Now, the `dist` directory should wrap me. Basically, I'm just a set of HTML/JS/CSS and image files which can be
