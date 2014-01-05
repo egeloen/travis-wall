@@ -97,6 +97,9 @@ module.exports = function(grunt) {
                 files:  [ 'lib/**/*' ],
                 tasks:  [ 'build' ]
             }
+        },
+        jshint: {
+            files: [ 'lib/**/*.js' ]
         }
     });
 
@@ -109,10 +112,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('install', [ 'bower:install' ]);
     grunt.registerTask('build', [ 'clean:dist', 'copy', 'less', 'cssmin', 'ngmin', 'uglify', 'clean:build' ]);
     grunt.registerTask('dist', [ 'install', 'build' ]);
     grunt.registerTask('server', [ 'dist', 'express:dev' ]);
     grunt.registerTask('dev', [ 'server', 'watch' ]);
+    grunt.registerTask('test', [ 'jshint' ]);
 };
