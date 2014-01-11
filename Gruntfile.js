@@ -98,6 +98,10 @@ module.exports = function(grunt) {
             lib: {
                 files:  [ 'lib/**/*' ],
                 tasks:  [ 'build' ]
+            },
+            public: {
+                files: [ 'public/**/*' ],
+                tasks: [ 'build' ]
             }
         },
         jshint: {
