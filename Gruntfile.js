@@ -1,4 +1,6 @@
 module.exports = function(grunt) {
+    'use strict';
+
     grunt.initConfig({
         express: {
             options: {
@@ -99,7 +101,24 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            files: [ 'lib/**/*.js' ]
+            files: [
+                'lib/**/*.js',
+                'test/**/*.js',
+                'Gruntfile.js'
+            ]
+        },
+        jasmine: {
+            app: {
+                src: 'dist/js/app.min.js',
+                options: {
+                    specs: 'test/**/*Spec.js'
+                }
+            }
+        },
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js'
+            }
         }
     });
 
@@ -113,11 +132,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('install', [ 'bower:install' ]);
     grunt.registerTask('build', [ 'clean:dist', 'copy', 'less', 'cssmin', 'ngmin', 'uglify', 'clean:build' ]);
     grunt.registerTask('dist', [ 'install', 'build' ]);
-    grunt.registerTask('server', [ 'dist', 'express:dev' ]);
-    grunt.registerTask('dev', [ 'server', 'watch' ]);
-    grunt.registerTask('test', [ 'jshint' ]);
+    grunt.registerTask('serve', [ 'dist', 'express:dev', 'watch' ]);
+    grunt.registerTask('test', [ 'jshint', 'karma:unit' ]);
+    grunt.registerTask('travis', [ 'dist', 'test' ]);
 };

@@ -7,7 +7,7 @@
 >
     <div
         class="repository"
-        ng-repeat="repository in user.repositories.all | orderBy: [ '-buildStatusCode', '-buildFinishedAt.unix()' ]"
+        ng-repeat="repository in user.repositories | orderBy: [ '-buildStatusCode', '-buildFinishedAt.unix()' ]"
         masonry-brick
     >
         <div class="repository-container repository-status-{{ repository.buildStatus }}">
@@ -26,11 +26,17 @@
                 </span>
             </div>
 
-            <div class="repository-metadata" ng-show="repository.buildStatusCode === 1">
+            <div
+                class="repository-metadata"
+                ng-show="repository.buildStatusCode === repository.BUILD_STATUS_CODE_UNKNOWN"
+            >
                 <div class="repository-unknown">Unknown status</div>
             </div>
 
-            <div class="repository-metadata" ng-show="repository.buildStatusCode === 3">
+            <div
+                class="repository-metadata"
+                ng-show="repository.buildStatusCode === repository.BUILD_STATUS_CODE_BUILDING"
+            >
                 <div class="repository-building">Building...</div>
             </div>
 

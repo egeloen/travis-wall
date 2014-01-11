@@ -1,0 +1,10 @@
+language: node_js
+
+before_script: npm install
+script: grunt travis --verbose
+
+branches:
+    only: master
+
+notifications:
+    email: geloen.eric@gmail.com

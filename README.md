@@ -33,22 +33,22 @@ Because I'm an angular application, I can't be ran like simple HTML files... To 
 with an ExpressJS web server which can be ran as simple as the following command:
 
 ``` bash
-$ grunt server
+$ grunt serve
 ```
 
 Then, you can play with me at [http://localhost:3000](http://localhost:3000).
 
+## Test me
+
+I'm unit tested with [Karma](http://karma-runner.github.io) and [Jasmine](http://pivotal.github.io/jasmine/):
+
+``` bash
+$ grunt test
+```
+
 ## Enhance me
 
 Like all open source projects, I love contributors! If you'd like to contribute, feel free to propose a PR!
-
-By the way, I provide an additional Grunt task which will ease your development with me:
-
-``` bash
-grunt dev
-```
-
-Then all files are watched to detect changes and then rebuild me on the fly :)
 
 ## License
 

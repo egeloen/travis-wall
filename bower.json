@@ -1,9 +1,10 @@
 {
     "name": "travis-wall",
     "dependencies": {
-        "angular": "1.2.6",
-        "angular-route": "1.2.6",
+        "angular": "1.2.8",
+        "angular-route": "1.2.8",
         "angular-masonry": "0.7.0",
+        "angular-mocks": "1.2.8",
         "momentjs": "2.5.0",
         "normalize-css": "2.1.3",
         "lesshat": "2.0.13"
