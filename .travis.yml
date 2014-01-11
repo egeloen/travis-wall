@@ -1,6 +1,9 @@
 language: node_js
 
-before_script: npm install
+before_script:
+    - npm install grunt-cli -g
+    - npm install
+
 script: grunt travis --verbose
 
 branches:
