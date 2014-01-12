@@ -5,6 +5,8 @@
 Hey everyone! I'm Travis Wall, a [SaaS](http://en.wikipedia.org/wiki/Software_as_a_service) which gives you feedbacks
 about your [Travis](https://travis-ci.org/)!
 
+You can browse me at [http://egeloen.fr/travis-wall](http://egeloen.fr/travis-wall).
+
 ## Install me
 
 My installation process is based on [Npm](https://npmjs.org/), a dependency manager for [NodeJS](http://nodejs.org/).
