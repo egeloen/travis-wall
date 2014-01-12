@@ -1,5 +1,7 @@
 # README
 
+[![Build Status](https://secure.travis-ci.org/egeloen/travis-wall.png)](http://travis-ci.org/egeloen/travis-wall)
+
 Hey everyone! I'm Travis Wall, a [SaaS](http://en.wikipedia.org/wiki/Software_as_a_service) which gives you feedbacks
 about your [Travis](https://travis-ci.org/)!
 
