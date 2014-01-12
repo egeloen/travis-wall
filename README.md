@@ -7,7 +7,7 @@ about your [Travis](https://travis-ci.org/)!
 
 ## Install me
 
-My installation process is based on [Npm](https://npmjs.org/), a dependency manager for [NodeJS](http://nodejs.org).
+My installation process is based on [Npm](https://npmjs.org/), a dependency manager for [NodeJS](http://nodejs.org/).
 So, first, you need to install it on your system. After, install my dependencies:
 
 ``` bash
@@ -20,7 +20,7 @@ At the end, the `node_modules` directory should have been created...
 
 Once my dependencies are well installed, you need to build me because my source code can not work as it is. My building
 process and many other processes are managed by [Grunt](http://gruntjs.com/), a task manager for
-[NodeJS](http://nodejs.org):
+[NodeJS](http://nodejs.org/):
 
 ``` bash
 $ grunt dist
@@ -32,17 +32,17 @@ deployed on any web server :)
 ## Run me
 
 Because I'm an angular application, I can't be ran like simple HTML files... To ease your play with me, I'm shipped
-with an ExpressJS web server which can be ran as simple as the following command:
+with an [ExpressJS](http://expressjs.com/) web server which can be ran as simple as the following command:
 
 ``` bash
 $ grunt serve
 ```
 
-Then, you can play with me at [http://localhost:3000](http://localhost:3000).
+Then, you can play with me at [http://localhost:3000](http://localhost:3000/).
 
 ## Test me
 
-I'm unit tested with [Karma](http://karma-runner.github.io) and [Jasmine](http://pivotal.github.io/jasmine/):
+I'm unit tested with [Karma](http://karma-runner.github.io/) and [Jasmine](http://pivotal.github.io/jasmine/):
 
 ``` bash
 $ grunt test
