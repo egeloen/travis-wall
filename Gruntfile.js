@@ -50,6 +50,9 @@ module.exports = function(grunt) {
             }
         },
         cssmin : {
+            options: {
+                keepSpecialComments: 0
+            },
             app: {
                 src: 'build/app.css',
                 dest: 'dist/css/app.min.css'
