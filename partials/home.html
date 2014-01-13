@@ -43,36 +43,13 @@
         <h2>Give me a try...</h2>
         <p>Enter your Travis username and start monitoring your projects!</p>
 
-        <form name="loginForm" novalidate ng-submit="login(user)">
-            <input
-                name="username"
-                type="text"
-                placeholder="Travis username..."
-                autocomplete="off"
-                required
-                ng-model="user.username"
-                ng-travis-user
-            />
-
-            <span ng-show="loginForm.username.$dirty && loginForm.username.$error.travis">
-                It seems the user does not exist or there is simply no repo(s) to monitor...
-            </span>
-
-            <span ng-show="loginForm.username.$dirty && loginForm.username.$processing">
-                Checking...
-            </span>
-
-            <span ng-show="loginForm.$valid && !loginForm.username.$detection && !loginForm.username.$processing">
-                Let's go!
-            </span>
-
-            <button
-                type="submit"
-                ng-show="loginForm.$valid && !loginForm.username.$detection && !loginForm.username.$processing"
-            >
-                Monitor
-            </button>
+        <form name="loginForm" novalidate ng-submit="login()">
+            <div ng-travis-login></div>
         </form>
+
+        <p class="tip">
+            To get a token: <code>gem install travis && travis login --pro && travis token --pro</code>
+        </p>
 
         <h2>License</h2>
         <p>

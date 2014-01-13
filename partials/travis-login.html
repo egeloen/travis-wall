@@ -1,0 +1,36 @@
+<input
+    id="travis-username"
+    name="username"
+    type="text"
+    placeholder="Travis username..."
+    autocomplete="off"
+    required
+    ng-model="user.username"
+/>
+
+<input
+    id="travis-token"
+    name="token"
+    type="password"
+    placeholder="Travis token..."
+    ng-model="user.token"
+/>
+
+<span ng-show="loginForm.username.$dirty && loginForm.$error.travis">
+    It seems the user does not exist or there is simply no repo(s) to monitor...
+</span>
+
+<span ng-show="loginForm.username.$dirty && loginForm.$processing">
+    Checking...
+</span>
+
+<span ng-show="loginForm.$valid && !loginForm.$detection && !loginForm.$processing">
+    Let's go!
+</span>
+
+<button
+    type="submit"
+    ng-show="loginForm.$valid && !loginForm.$detection && !loginForm.$processing"
+>
+    Monitor
+</button>
