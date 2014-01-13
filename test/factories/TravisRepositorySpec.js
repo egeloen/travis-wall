@@ -2,6 +2,7 @@ describe('TravisRepositorySpec', function () {
     'use strict';
 
     var _travisRepository;
+    var _user;
     var _httpBackend;
 
     function _createData () {
@@ -10,6 +11,11 @@ describe('TravisRepositorySpec', function () {
 
     beforeEach(function () {
         module('travis-wall');
+
+        _user = {
+            username: 'foo',
+            token: ''
+        };
 
         inject(function (TravisRepository, $httpBackend) {
             _travisRepository = TravisRepository;
@@ -22,63 +28,87 @@ describe('TravisRepositorySpec', function () {
         _httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('should be able to get repositories by owner', function () {
-        _httpBackend
-            .when('GET', 'https://api.travis-ci.org/repos?owner_name=foo')
-            .respond(_createData());
+    describe('API for public account', function () {
+        it('should be able to get repositories (starting by member)', function () {
+            _httpBackend
+                .when('GET', 'https://api.travis-ci.org/repos?member=foo')
+                .respond(_createData());
 
-        _travisRepository
-            .getByOwner('foo')
-            .then(function (repositories) {
-                expect(repositories).toEqual(_createData());
-            });
+            _travisRepository
+                .get(_user)
+                .then(function (repositories) {
+                    expect(repositories).toEqual(_createData());
+                });
 
-        _httpBackend.flush();
+            _httpBackend.flush();
+        });
+
+        it('should be able to get repositories (fallback on owner if there is no repos for the member)', function () {
+            _httpBackend
+                .when('GET', 'https://api.travis-ci.org/repos?member=foo')
+                .respond([]);
+
+            _httpBackend
+                .when('GET', 'https://api.travis-ci.org/repos?owner_name=foo')
+                .respond(_createData());
+
+            _travisRepository
+                .get(_user)
+                .then(function (repositories) {
+                    expect(repositories).toEqual(_createData());
+                });
+
+            _httpBackend.flush();
+        });
     });
 
-    it('should be able to get repositories by member', function () {
-        _httpBackend
-            .when('GET', 'https://api.travis-ci.org/repos?member=foo')
-            .respond(_createData());
+    describe('API for public/private account', function () {
+        beforeEach(function () {
+            _user.token = 'bar';
+        });
 
-        _travisRepository
-            .getByMember('foo')
-            .then(function (repositories) {
-                expect(repositories).toEqual(_createData());
-            });
+        it('should be able to get repositories (starting by member)', function () {
+            _httpBackend
+                .when('GET', 'https://api.travis-ci.org/repos?member=foo')
+                .respond(_createData());
 
-        _httpBackend.flush();
-    });
+            _httpBackend
+                .when('GET', 'https://api.travis-ci.com/repos?member=foo', { Authorization: 'token bar' })
+                .respond(_createData());
 
-    it('should be able to get repositories (starting by member)', function () {
-        _httpBackend
-            .when('GET', 'https://api.travis-ci.org/repos?member=foo')
-            .respond(_createData());
+            _travisRepository
+                .get(_user)
+                .then(function (repositories) {
+                    expect(repositories).toEqual(_createData().concat(_createData()));
+                });
 
-        _travisRepository
-            .get('foo')
-            .then(function (repositories) {
-                expect(repositories).toEqual(_createData());
-            });
+            _httpBackend.flush();
+        });
 
-        _httpBackend.flush();
-    });
+        it('should be able to get repositories (fallback on owner if there is no repos for the member)', function () {
+            _httpBackend
+                .when('GET', 'https://api.travis-ci.org/repos?member=foo')
+                .respond([]);
 
-    it('should be able to get repositories (fallback on owner if there is no repos for the member)', function () {
-        _httpBackend
-            .when('GET', 'https://api.travis-ci.org/repos?member=foo')
-            .respond([]);
+            _httpBackend
+                .when('GET', 'https://api.travis-ci.org/repos?owner_name=foo')
+                .respond(_createData());
 
-        _httpBackend
-            .when('GET', 'https://api.travis-ci.org/repos?owner_name=foo')
-            .respond(_createData());
+            _httpBackend
+                .when('GET', 'https://api.travis-ci.com/repos?member=foo', { Authorization: 'token bar' })
+                .respond([]);
 
-        _travisRepository
-            .get('foo')
-            .then(function (repositories) {
-                expect(repositories).toEqual(_createData());
-            });
+            _httpBackend
+                .when('GET', 'https://api.travis-ci.com/repos?owner_name=foo', { Authorization: 'token bar' })
+                .respond(_createData());
 
-        _httpBackend.flush();
+            _travisRepository
+                .get(_user)
+                .then(function (repositories) {
+                    expect(repositories).toEqual(_createData().concat(_createData()));
+                });
+
+            _httpBackend.flush();
+        });
     });
 });

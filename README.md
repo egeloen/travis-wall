@@ -5,7 +5,8 @@
 Hey everyone! I'm Travis Wall, a [SaaS](http://en.wikipedia.org/wiki/Software_as_a_service) which gives you feedbacks
 about your [Travis](https://travis-ci.org/)!
 
-You can browse me at [http://egeloen.fr/travis-wall](http://egeloen.fr/travis-wall).
+I react in semi-realtime (every 15 sec) and I'm compatible with public/private accounts, mobile, tablet, desktop.
+You can give me a try at [http://egeloen.fr/travis-wall](http://egeloen.fr/travis-wall).
 
 ## Install me
 
