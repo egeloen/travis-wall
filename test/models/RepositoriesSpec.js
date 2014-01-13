@@ -46,7 +46,7 @@ describe('RepositoriesSpec', function () {
 
         expect(_repositories.all.length).toBe(current.length);
 
-        expect(_repositories.all[0]).not.toBe(current[0]);
+        expect(_repositories.all[0]).toBe(current[0]);
         expect(_repositories.all[0].data).toBe(collection[0]);
 
         expect(_repositories.all[1]).toBe(current[1]);
