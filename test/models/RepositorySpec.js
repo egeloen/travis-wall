@@ -79,6 +79,16 @@ describe('RepositorySpec', function () {
         expect(_repository.buildStatus).toBe('passed');
     });
 
+    it('should be able to get the build status errored', function () {
+        var data = _createData();
+        data.last_build_status = -1;
+
+        _repository.data = data;
+
+        expect(_repository.buildStatusCode).toBe(_repository.BUILD_STATUS_CODE_ERRORED);
+        expect(_repository.buildStatus).toBe('errored');
+    });
+
     it('should be able to get the build status failed', function () {
         var data = _createData();
         data.last_build_status = 1;
@@ -89,8 +99,21 @@ describe('RepositorySpec', function () {
         expect(_repository.buildStatus).toBe('failed');
     });
 
+    it('should be able to get the build status queued', function () {
+        var data = _createData();
+        data.last_build_status = -1;
+        data.last_build_started_at = null;
+        data.last_build_finished_at = null;
+
+        _repository.data = data;
+
+        expect(_repository.buildStatusCode).toBe(_repository.BUILD_STATUS_CODE_QUEUED);
+        expect(_repository.buildStatus).toBe('queued');
+    });
+
     it('should be able to get the build status building', function () {
         var data = _createData();
+        data.last_build_status = -1;
         data.last_build_finished_at = null;
 
         _repository.data = data;
@@ -102,6 +125,7 @@ describe('RepositorySpec', function () {
     it('should be able to get the build status unknown', function () {
         var data = _createData();
         data.last_build_status = -1;
+        data.last_build_started_at = null;
 
         _repository.data = data;
 

@@ -7,7 +7,9 @@
 @repository-gradient: 10%;
 
 @repository-building-color: #ff0;
+@repository-queued-color: #99f;
 @repository-unknown-color: #fff;
+@repository-errored-color: #ededed;
 @repository-failed-color: #ff3019;
 @repository-passed-color: #25cc00;
 
@@ -47,8 +49,16 @@
     .repository-status(@repository-building-color);
 }
 
+.repository-status-queued {
+    .repository-status(@repository-queued-color);
+}
+
 .repository-status-unknown {
     .repository-status(@repository-unknown-color);
+}
+
+.repository-status-errored {
+    .repository-status(@repository-errored-color);
 }
 
 .repository-status-failed {
@@ -70,6 +80,7 @@
 
 .repository-build-finished-at,
 .repository-building,
+.repository-queued,
 .repository-unknown {
     padding-left: 20px;
 }
@@ -80,6 +91,10 @@
 
 .repository-building {
     background: url('../img/build.png') no-repeat 0 2px;
+}
+
+.repository-queued {
+    background: url('../img/queued.png') no-repeat -1px 2px;
 }
 
 .repository-unknown {

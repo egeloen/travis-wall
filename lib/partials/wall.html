@@ -28,9 +28,9 @@
 
             <div
                 class="repository-metadata"
-                ng-show="repository.buildStatusCode === repository.BUILD_STATUS_CODE_UNKNOWN"
+                ng-show="repository.buildStatusCode === repository.BUILD_STATUS_CODE_QUEUED"
             >
-                <div class="repository-unknown">Unknown status</div>
+                <div class="repository-queued">Build queued...</div>
             </div>
 
             <div
@@ -38,6 +38,13 @@
                 ng-show="repository.buildStatusCode === repository.BUILD_STATUS_CODE_BUILDING"
             >
                 <div class="repository-building">Building...</div>
+            </div>
+
+            <div
+                class="repository-metadata"
+                ng-show="repository.buildStatusCode === repository.BUILD_STATUS_CODE_UNKNOWN"
+            >
+                <div class="repository-unknown">Unknown status</div>
             </div>
 
             <a class="repository-github" href="{{ repository.githubUrl }}">
