@@ -10,6 +10,7 @@ describe('RepositorySpec', function () {
     function _createData () {
         return {
             id: 123,
+            private: false,
             slug: 'user/repository',
             description: 'description',
             last_build_id: 16392010,
@@ -35,6 +36,10 @@ describe('RepositorySpec', function () {
         expect(_repository.id).toBe(_data.id);
     });
 
+    it('should be able to get the private flag', function () {
+        expect(_repository.private).toBe(_data.private);
+    });
+
     it('should be able to get the slug', function () {
         expect(_repository.slug).toBe(_data.slug);
     });
@@ -47,8 +52,14 @@ describe('RepositorySpec', function () {
         expect(_repository.githubUrl).toBe('https://github.com/' + _data.slug);
     });
 
-    it('should be able to get the travis url', function () {
+    it('should be able to get the travis url for a public repository', function () {
         expect(_repository.travisUrl).toBe('https://travis-ci.org/' + _data.slug);
+    });
+
+    it('should be able to get the travis url for a private repository', function () {
+        _repository.data.private = true;
+
+        expect(_repository.travisUrl).toBe('https://magnum.travis-ci.com/' + _data.slug);
     });
 
     it('should be able to get the build id', function () {

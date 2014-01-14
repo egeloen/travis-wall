@@ -9,6 +9,16 @@ describe('TravisRepositorySpec', function () {
         return [ { slug: 'user/repository-1' }, { slug: 'user/repository-2' } ];
     }
 
+    function _createBuildedData (value) {
+        var _data = _createData();
+
+        for (var key in _data) {
+            _data[key].private = value;
+        }
+
+        return _data;
+    }
+
     beforeEach(function () {
         module('travis-wall');
 
@@ -37,7 +47,7 @@ describe('TravisRepositorySpec', function () {
             _travisRepository
                 .get(_user)
                 .then(function (repositories) {
-                    expect(repositories).toEqual(_createData());
+                    expect(repositories).toEqual(_createBuildedData(false));
                 });
 
             _httpBackend.flush();
@@ -55,7 +65,7 @@ describe('TravisRepositorySpec', function () {
             _travisRepository
                 .get(_user)
                 .then(function (repositories) {
-                    expect(repositories).toEqual(_createData());
+                    expect(repositories).toEqual(_createBuildedData(false));
                 });
 
             _httpBackend.flush();
@@ -79,7 +89,7 @@ describe('TravisRepositorySpec', function () {
             _travisRepository
                 .get(_user)
                 .then(function (repositories) {
-                    expect(repositories).toEqual(_createData().concat(_createData()));
+                    expect(repositories).toEqual(_createBuildedData(false).concat(_createBuildedData(true)));
                 });
 
             _httpBackend.flush();
@@ -105,7 +115,7 @@ describe('TravisRepositorySpec', function () {
             _travisRepository
                 .get(_user)
                 .then(function (repositories) {
-                    expect(repositories).toEqual(_createData().concat(_createData()));
+                    expect(repositories).toEqual(_createBuildedData(false).concat(_createBuildedData(true)));
                 });
 
             _httpBackend.flush();
