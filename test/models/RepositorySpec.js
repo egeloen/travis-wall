@@ -178,24 +178,16 @@ describe('RepositorySpec', function () {
         expect(_repository.data).toBe(data);
     });
 
-    describe('should be able to compare with an other repository', function () {
-        var _cloneRepository;
-
-        beforeEach(function () {
-            _cloneRepository = new Repository(_createData());
-        });
-
+    describe('should be able to compare with an other repository data', function () {
         it('should be able to compare with a similar repository', function () {
-            expect(_repository.compare(_cloneRepository)).toBeTruthy();
+            expect(_repository.compare(_createData())).toBeTruthy();
         });
 
         it('should be able to compare with a different repository', function () {
             var data = _createData();
             data.id = 321;
 
-            _cloneRepository.data = data;
-
-            expect(_repository.compare(_cloneRepository)).toBeFalsy();
+            expect(_repository.compare(data)).toBeFalsy();
         });
     });
 });
