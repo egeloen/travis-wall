@@ -124,7 +124,19 @@ module.exports = function(grunt) {
         },
         karma: {
             unit: {
-                configFile: 'karma.conf.js'
+                options: {
+                   files: [
+                        'dist/**/*.js',
+                        'bower_components/angular-mocks/angular-mocks.js',
+                        'test/**/*.js'
+                    ],
+                    frameworks: [ 'jasmine' ],
+                    browsers: [ 'PhantomJS' ],
+                    reporters: [ 'dots' ],
+                    port: 9876,
+                    autoWatch: false,
+                    singleRun: true
+                }
             }
         }
     });
