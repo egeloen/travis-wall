@@ -8,6 +8,8 @@ about your [Travis](https://travis-ci.org/)!
 I react in semi-realtime (every 15 sec) and I'm compatible with public/private accounts, mobile, tablet, desktop.
 You can give me a try at [http://egeloen.fr/travis-wall](http://egeloen.fr/travis-wall).
 
+![Screenshot](https://raw.github.com/egeloen/travis-wall/master/doc/screenshot.png)
+
 ## Install me
 
 My installation process is based on [Npm](https://npmjs.org/), a dependency manager for [NodeJS](http://nodejs.org/).
