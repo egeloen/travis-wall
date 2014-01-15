@@ -13,8 +13,6 @@
         "grunt-contrib-jasmine": "0.5.2",
         "grunt-ngmin": "0.0.3",
         "grunt-karma": "0.6.2",
-        "karma-jasmine": "0.1.5",
-        "karma-chrome-launcher": "0.1.2",
         "grunt-express-server": "0.4.11",
         "express": "3.4.7"
     }
