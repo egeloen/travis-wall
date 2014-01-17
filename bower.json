@@ -3,6 +3,7 @@
     "dependencies": {
         "angular": "1.2.8",
         "angular-route": "1.2.8",
+        "angular-spinner": "0.2.1",
         "angular-masonry": "0.7.0",
         "angular-mocks": "1.2.8",
         "momentjs": "2.5.0",

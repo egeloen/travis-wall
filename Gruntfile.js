@@ -71,7 +71,9 @@ module.exports = function(grunt) {
                         'bower_components/jquery/jquery.js',
                         'bower_components/angular/angular.js',
                         'bower_components/angular-route/angular-route.js',
+                        'bower_components/angular-spinner/angular-spinner.js',
                         'bower_components/angular-masonry/angular-masonry.js',
+                        'bower_components/spin.js/spin.js',
                         'bower_components/get-style-property/get-style-property.js',
                         'bower_components/get-size/get-size.js',
                         'bower_components/eventie/eventie.js',
@@ -157,7 +159,7 @@ module.exports = function(grunt) {
     grunt.registerTask('install', [ 'bower:install' ]);
     grunt.registerTask('build', [ 'clean:dist', 'copy', 'less', 'cssmin', 'ngmin', 'uglify', 'clean:build' ]);
     grunt.registerTask('dist', [ 'install', 'build' ]);
-    grunt.registerTask('serve', [ 'dist', 'express:dev', 'watch' ]);
+    grunt.registerTask('serve', [ 'express:dev', 'watch' ]);
     grunt.registerTask('test', [ 'jshint', 'karma:unit' ]);
     grunt.registerTask('travis', [ 'dist', 'test' ]);
 };
