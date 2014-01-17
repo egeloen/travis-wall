@@ -7,19 +7,27 @@ describe('WallControllerSpec', function () {
     var _q;
     var _location;
     var _travisRepository;
+    var _travisRepositoryState;
     var _repositories;
 
     function _createController () {
-        return _controller('WallController', { $scope: _scope});
+        return _controller('WallController', { $scope: _scope });
     }
 
     beforeEach(function () {
         module('travis-wall');
 
+        _travisRepositoryState = true;
+
         _travisRepository = {
             get: function () {
                 var deferred = _q.defer();
-                deferred.resolve(_repositories);
+
+                if (_travisRepositoryState) {
+                    deferred.resolve(_repositories);
+                } else {
+                    deferred.reject();
+                }
 
                 return deferred.promise;
             }
@@ -74,6 +82,16 @@ describe('WallControllerSpec', function () {
 
     it('should redirect the user to the homepage if there is no repositories', function () {
         _repositories = [];
+        _createController();
+
+        _scope.$digest();
+
+        expect(_travisRepository.get).toHaveBeenCalledWith(_scope.user);
+        expect(_location.path()).toBe('/');
+    });
+
+    it('should redirect the user to the homepage if an error occured', function () {
+        _travisRepositoryState = false;
         _createController();
 
         _scope.$digest();
