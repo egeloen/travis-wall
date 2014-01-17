@@ -1,6 +1,10 @@
 @import '../bower_components/lesshat/build/lesshat.less';
 @import 'variables.less';
 
+@transition-duration: 1s;
+@masonry-transition-property: height, width;
+@masonry-brick-transition-property: left, right, top;
+
 @repository-guttle: 10px;
 @repository-radius: @repository-guttle / 2;
 @repository-shadow: 1px 1px 12px #555;
@@ -18,8 +22,14 @@
     .background-image(linear-gradient(to bottom, @color, darken(@color, @repository-gradient)));
 }
 
+#repositories,
+.repository {
+    .transition-duration(@transition-duration);
+}
+
 #repositories {
     margin: @repository-guttle;
+    .transition-property(@masonry-transition-property);
 
     a {
         text-decoration: none;
@@ -38,6 +48,13 @@
 
 .repository {
     float: left;
+    display: none;
+
+    .transition-property(@masonry-brick-transition-property);
+
+    &.loaded {
+        display: block;
+    }
 }
 
 .repository-container {
