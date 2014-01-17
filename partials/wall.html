@@ -3,7 +3,7 @@
     masonry
     preserve-order
     item-selector=".repository"
-    masonry-options="{ transitionDuration: '1.5s' }"
+    masonry-options="{ transitionDuration: '0s' }"
 >
     <div
         class="repository"
@@ -52,4 +52,6 @@
             </a>
         </div>
     </div>
+
+    <div class="spinner" us-spinner ng-hide="user.repositories.length"></div>
 </div>
