@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 1.0.1 (????-??-??)
+### 1.0.1 (2014-01-19)
 
  * 078bc0d - [Express] Simplify server
  * baec3f8 - Fix behavior if an http request fails
