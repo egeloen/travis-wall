@@ -13,6 +13,8 @@
         "grunt-contrib-jasmine": "0.5.2",
         "grunt-ngmin": "0.0.3",
         "grunt-karma": "0.6.2",
+        "protractor": "0.17.0",
+        "grunt-protractor-runner": "0.2.1",
         "grunt-express-server": "0.4.11",
         "express": "3.4.7"
     }

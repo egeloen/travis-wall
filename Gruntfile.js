@@ -3,10 +3,11 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         express: {
-            options: {
-                script: 'server.js'
-            },
-            dev: {}
+            app: {
+                options: {
+                    script: 'server.js'
+                }
+            }
         },
         bower: {
             install: {
@@ -130,7 +131,7 @@ module.exports = function(grunt) {
                    files: [
                         'dist/**/*.js',
                         'bower_components/angular-mocks/angular-mocks.js',
-                        'test/**/*.js'
+                        'test/unit/**/*.js'
                     ],
                     frameworks: [ 'jasmine' ],
                     browsers: [ 'PhantomJS' ],
@@ -138,6 +139,13 @@ module.exports = function(grunt) {
                     port: 9876,
                     autoWatch: false,
                     singleRun: true
+                }
+            }
+        },
+        protractor: {
+            e2e: {
+                options: {
+                    configFile: 'protractor.conf.js'
                 }
             }
         }
@@ -155,11 +163,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-protractor-runner');
 
     grunt.registerTask('install', [ 'bower:install' ]);
     grunt.registerTask('build', [ 'clean:dist', 'copy', 'less', 'cssmin', 'ngmin', 'uglify', 'clean:build' ]);
     grunt.registerTask('dist', [ 'install', 'build' ]);
-    grunt.registerTask('serve', [ 'express:dev', 'watch' ]);
-    grunt.registerTask('test', [ 'jshint', 'karma:unit' ]);
-    grunt.registerTask('travis', [ 'dist', 'test' ]);
+    grunt.registerTask('serve', [ 'express:app', 'watch' ]);
+    grunt.registerTask('test:unit', [ 'jshint', 'karma:unit' ]);
+    grunt.registerTask('test:e2e', [ 'express:app', 'protractor:e2e' ]);
+    grunt.registerTask('travis', [ 'dist', 'test:unit', 'test:e2e' ]);
 };
