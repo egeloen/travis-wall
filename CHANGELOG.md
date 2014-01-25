@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 1.0.2 (????-??-??)
+
+ * 521501c - [Protractor] Add e2e tests
+
 ### 1.0.1 (2014-01-19)
 
  * 078bc0d - [Express] Simplify server
