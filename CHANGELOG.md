@@ -2,6 +2,8 @@
 
 ### 1.0.2 (????-??-??)
 
+ * 2c5f7a2 - Add htmlmin support
+ * 1932838 - Make logo part of the header + Clean html
  * 3f5cbec - Base64 encode CSS resources with grunt-image-embed
  * 521501c - [Protractor] Add e2e tests
 
