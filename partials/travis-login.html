@@ -16,15 +16,15 @@
     ng-model="user.token"
 />
 
-<span ng-show="loginForm.username.$dirty && loginForm.$error.travis">
+<span class="error" ng-show="loginForm.username.$dirty && loginForm.$error.travis">
     It seems the username/token is not valid or there is simply no repository to monitor...
 </span>
 
-<span ng-show="loginForm.username.$dirty && loginForm.$processing">
+<span class="process" ng-show="loginForm.username.$dirty && loginForm.$processing">
     Checking...
 </span>
 
-<span ng-show="loginForm.$valid && !loginForm.$detection && !loginForm.$processing">
+<span class="success" ng-show="loginForm.$valid && !loginForm.$detection && !loginForm.$processing">
     Let's go!
 </span>
 
