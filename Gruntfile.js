@@ -171,5 +171,6 @@ module.exports = function(grunt) {
     grunt.registerTask('serve', [ 'express:app', 'watch' ]);
     grunt.registerTask('test:unit', [ 'jshint', 'karma:unit' ]);
     grunt.registerTask('test:e2e', [ 'express:app', 'protractor:e2e' ]);
-    grunt.registerTask('travis', [ 'dist', 'test:unit', 'test:e2e' ]);
+    grunt.registerTask('test', [ 'test:unit', 'test:e2e' ]);
+    grunt.registerTask('travis', [ 'dist', 'test' ]);
 };
