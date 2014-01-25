@@ -47,7 +47,8 @@ Then, you can play with me at [http://localhost:3000](http://localhost:3000/).
 
 ## Test me
 
-I'm unit tested with [Karma](http://karma-runner.github.io/) and [Jasmine](http://pivotal.github.io/jasmine/):
+I'm unit tested with [Karma](http://karma-runner.github.io/)/[Jasmine](http://pivotal.github.io/jasmine/) and I use
+[Protractor](https://github.com/angular/protractor) for e2e tests. To run them, just execute:
 
 ``` bash
 $ grunt test
