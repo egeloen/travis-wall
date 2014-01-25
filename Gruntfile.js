@@ -20,12 +20,10 @@ module.exports = function(grunt) {
         },
         copy: {
             app: {
-                files: [
-                    {
-                        src: [ 'public/favicon.ico' ],
-                        dest: 'dist/favicon.ico'
-                    }
-                ]
+                files: [{
+                    src: [ 'public/favicon.ico' ],
+                    dest: 'dist/favicon.ico'
+                }]
             }
         },
         htmlmin: {
@@ -108,6 +106,10 @@ module.exports = function(grunt) {
             build: [ 'build' ]
         },
         watch: {
+            img: {
+                files:  [ 'img/**/*' ],
+                tasks:  [ 'build' ]
+            },
             less: {
                 files:  [ 'less/**/*' ],
                 tasks:  [ 'build' ]
@@ -125,7 +127,7 @@ module.exports = function(grunt) {
             files: [
                 'lib/**/*.js',
                 'test/**/*.js',
-                'Gruntfile.js'
+                '*.js'
             ]
         },
         jasmine: {
@@ -139,17 +141,7 @@ module.exports = function(grunt) {
         karma: {
             unit: {
                 options: {
-                   files: [
-                        'dist/**/*.js',
-                        'bower_components/angular-mocks/angular-mocks.js',
-                        'test/unit/**/*.js'
-                    ],
-                    frameworks: [ 'jasmine' ],
-                    browsers: [ 'PhantomJS' ],
-                    reporters: [ 'dots' ],
-                    port: 9876,
-                    autoWatch: false,
-                    singleRun: true
+                    configFile: 'karma.conf.js'
                 }
             }
         },
