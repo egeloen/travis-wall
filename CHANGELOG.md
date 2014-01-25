@@ -2,6 +2,7 @@
 
 ### 1.0.2 (????-??-??)
 
+ * 3f5cbec - Base64 encode CSS resources with grunt-image-embed
  * 521501c - [Protractor] Add e2e tests
 
 ### 1.0.1 (2014-01-19)
