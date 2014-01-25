@@ -50,6 +50,12 @@ module.exports = function(grunt) {
                 }
             }
         },
+        imageEmbed: {
+            app: {
+                src: [ 'build/app.css' ],
+                dest: 'build/app.css'
+            }
+        },
         cssmin : {
             options: {
                 keepSpecialComments: 0
@@ -156,6 +162,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-ngmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-image-embed');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -166,11 +173,45 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-protractor-runner');
 
     grunt.registerTask('install', [ 'bower:install' ]);
-    grunt.registerTask('build', [ 'clean:dist', 'copy', 'less', 'cssmin', 'ngmin', 'uglify', 'clean:build' ]);
-    grunt.registerTask('dist', [ 'install', 'build' ]);
-    grunt.registerTask('serve', [ 'express:app', 'watch' ]);
-    grunt.registerTask('test:unit', [ 'jshint', 'karma:unit' ]);
-    grunt.registerTask('test:e2e', [ 'express:app', 'protractor:e2e' ]);
-    grunt.registerTask('test', [ 'test:unit', 'test:e2e' ]);
-    grunt.registerTask('travis', [ 'dist', 'test' ]);
+
+    grunt.registerTask('build', [
+        'clean:dist',
+        'copy',
+        'less',
+        'imageEmbed',
+        'cssmin',
+        'ngmin',
+        'uglify',
+        'clean:build'
+    ]);
+
+    grunt.registerTask('dist', [
+        'install',
+        'build'
+    ]);
+
+    grunt.registerTask('serve', [
+        'express:app',
+        'watch'
+    ]);
+
+    grunt.registerTask('test:unit', [
+        'jshint',
+        'karma:unit'
+    ]);
+
+    grunt.registerTask('test:e2e', [
+        'express:app',
+        'protractor:e2e'
+    ]);
+
+    grunt.registerTask('test', [
+        'test:unit',
+        'test:e2e'
+    ]);
+
+    grunt.registerTask('travis', [
+        'dist',
+        'test'
+    ]);
 };
