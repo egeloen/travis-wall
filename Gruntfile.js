@@ -22,26 +22,31 @@ module.exports = function(grunt) {
             app: {
                 files: [
                     {
-                        expand: true,
-                        flatten: true,
-                        src: [ 'public/*' ],
-                        dest: 'dist/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: true,
-                        flatten: true,
-                        src: [ 'public/img/*' ],
-                        dest: 'dist/img/'
-                    },
-                    {
-                        expand: true,
-                        flatten: true,
-                        src: [ 'lib/partials/*' ],
-                        dest: 'dist/partials/'
+                        src: [ 'public/favicon.ico' ],
+                        dest: 'dist/favicon.ico'
                     }
                 ]
             }
+        },
+        htmlmin: {
+            app: {
+                options: {
+                    useShortDoctype: true,
+                    collapseWhitespace: true,
+                    collapseBooleanAttributes: true,
+                    removeComments: true,
+                    removeAttributeQuotes: true,
+                    removeRedundantAttributes: true,
+                    removeEmptyAttributes: true,
+                    removeOptionalTags: true
+                },
+                files: {
+                    'dist/index.html': 'public/index.html',
+                    'dist/partials/home.html': 'lib/partials/home.html',
+                    'dist/partials/travis-login.html': 'lib/partials/travis-login.html',
+                    'dist/partials/wall.html': 'lib/partials/wall.html'
+                }
+            },
         },
         less: {
             app: {
@@ -161,6 +166,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-ngmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-image-embed');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -177,6 +183,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'copy',
+        'htmlmin',
         'less',
         'imageEmbed',
         'cssmin',
