@@ -1,11 +1,14 @@
-@travis-logo-margin: 0 20px 20px 0;
+@import 'variables.less';
+
+@travis-logo-margin: 20px;
 @travis-logo-size: 75px;
 
 .travis-logo {
     float: left;
     width: @travis-logo-size;
     height: @travis-logo-size;
-    margin: @travis-logo-margin;
+    margin-right: @travis-logo-margin;
+    margin-bottom: @travis-logo-margin;
     background: url('../img/travis.png') no-repeat;
 }
 
@@ -18,5 +21,5 @@
 }
 
 .tip {
-    font-size: 12px;
+    font-size: @font-size - 2px;
 }

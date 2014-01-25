@@ -9,6 +9,7 @@
 @repository-radius: @repository-guttle / 2;
 @repository-shadow: 1px 1px 12px #555;
 @repository-gradient: 10%;
+@repository-padding: 20px;
 
 @repository-building-color: #ff0;
 @repository-queued-color: #99f;
@@ -99,7 +100,7 @@
 .repository-building,
 .repository-queued,
 .repository-unknown {
-    padding-left: 20px;
+    padding-left: @repository-padding;
 }
 
 .repository-build-finished-at {
