@@ -1,19 +1,16 @@
 @import 'variables.less';
 
-@travis-logo-margin: 20px;
-@travis-logo-size: 75px;
-
-.travis-logo {
-    float: left;
-    width: @travis-logo-size;
-    height: @travis-logo-size;
-    margin-right: @travis-logo-margin;
-    margin-bottom: @travis-logo-margin;
-    background: url('../img/travis.png') no-repeat;
-}
+@header-size: 75px;
+@header-padding: @header-size + 20px;
 
 #container {
     margin: auto;
+}
+
+header {
+    height: @header-size;
+    padding-left: @header-padding;
+    background: url('../img/travis.png') no-repeat;
 }
 
 #content {
