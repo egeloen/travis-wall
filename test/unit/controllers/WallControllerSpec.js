@@ -33,7 +33,7 @@ describe('WallControllerSpec', function () {
             }
         };
 
-        spyOn(_travisRepository, 'get').andCallThrough();
+        spyOn(_travisRepository, 'get').and.callThrough();
 
         module(function ($provide) {
             $provide.value('TravisRepository', _travisRepository);

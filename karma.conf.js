@@ -7,6 +7,7 @@ module.exports = function(config) {
             'bower_components/angular-mocks/angular-mocks.js',
             'test/unit/**/*Spec.js'
         ],
+        plugins: [ 'karma-jasmine', 'karma-phantomjs-launcher' ],
         frameworks: [ 'jasmine' ],
         browsers: [ 'PhantomJS' ],
         reporters: [ 'dots' ],

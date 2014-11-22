@@ -68,7 +68,7 @@ module.exports = function(grunt) {
                 dest: 'dist/css/app.min.css'
             }
         },
-        ngmin: {
+        ngAnnotate: {
             app: {
                 src: [ 'lib/**/*.js' ],
                 dest: 'build/app.js'
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
             app: {
                 files: {
                     'dist/js/app.min.js': [
-                        'bower_components/jquery/jquery.js',
+                        'bower_components/jquery/dist/jquery.js',
                         'bower_components/angular/angular.js',
                         'bower_components/angular-route/angular-route.js',
                         'bower_components/angular-spinner/angular-spinner.js',
@@ -89,13 +89,12 @@ module.exports = function(grunt) {
                         'bower_components/eventie/eventie.js',
                         'bower_components/doc-ready/doc-ready.js',
                         'bower_components/eventEmitter/EventEmitter.js',
-                        'bower_components/jquery-bridget/jquery.bridget.js',
                         'bower_components/matches-selector/matches-selector.js',
                         'bower_components/imagesloaded/imagesloaded.js',
                         'bower_components/outlayer/item.js',
                         'bower_components/outlayer/outlayer.js',
-                        'bower_components/masonry/masonry.js',
-                        'bower_components/momentjs/min/moment-with-langs.js',
+                        'bower_components/masonry/dist/masonry.pkgd.js',
+                        'bower_components/momentjs/min/moment-with-locales.js',
                         'build/app.js'
                     ]
                 }
@@ -156,7 +155,7 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-bower-task');
-    grunt.loadNpmTasks('grunt-ngmin');
+    grunt.loadNpmTasks('grunt-ng-annotate');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-less');
@@ -179,7 +178,7 @@ module.exports = function(grunt) {
         'less',
         'imageEmbed',
         'cssmin',
-        'ngmin',
+        'ngAnnotate',
         'uglify',
         'clean:build'
     ]);
