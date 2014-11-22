@@ -44,7 +44,7 @@ module.exports = function(grunt) {
                     'dist/partials/travis-login.html': 'lib/partials/travis-login.html',
                     'dist/partials/wall.html': 'lib/partials/wall.html'
                 }
-            },
+            }
         },
         less: {
             app: {
