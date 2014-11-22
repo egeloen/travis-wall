@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 1.0.2 (????-??-??)
+### 1.0.2 (2014-11-22)
 
  * 75349fa - Fix untracked repositories
  * 464a5b8 - Fix CS
