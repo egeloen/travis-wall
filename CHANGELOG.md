@@ -2,6 +2,7 @@
 
 ### 1.0.2 (????-??-??)
 
+ * 75349fa - Fix untracked repositories
  * 464a5b8 - Fix CS
  * 8b0bc2f - Update deps
  * 354a565 - [Readme] Fix badge uri
