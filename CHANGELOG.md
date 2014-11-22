@@ -2,6 +2,10 @@
 
 ### 1.0.2 (????-??-??)
 
+ * 464a5b8 - Fix CS
+ * 8b0bc2f - Update deps
+ * 354a565 - [Readme] Fix badge uri
+ * f7099c6 - [Travis] Update config
  * 80741a1 - [Karma] Move config in a dedicated file
  * 2c5f7a2 - Add htmlmin support
  * 1932838 - Make logo part of the header + Clean html
