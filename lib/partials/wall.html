@@ -7,7 +7,7 @@
 >
     <div
         class="repository"
-        ng-repeat="repository in user.repositories | orderBy: [ '-buildStatusCode', '-buildFinishedAt.unix()' ]"
+        ng-repeat="repository in user.repositories | orderBy: [ '-buildStatusCode', '-buildFinishedAt.unix()' ] | filter: { buildStatusCode: '!' + 6 }"
         masonry-brick
     >
         <div class="repository-container repository-status-{{ repository.buildStatus }}">

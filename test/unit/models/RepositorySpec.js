@@ -122,6 +122,17 @@ describe('RepositorySpec', function () {
         expect(_repository.buildStatus).toBe('building');
     });
 
+    it('should be able to get the build status untracked', function () {
+        var data = _createData();
+        data.last_build_status = null;
+        data.last_build_id = null;
+
+        _repository.data = data;
+
+        expect(_repository.buildStatusCode).toBe(_repository.BUILD_STATUS_CODE_UNTRACKED);
+        expect(_repository.buildStatus).toBe('untracked');
+    });
+
     it('should be able to get the build status unknown', function () {
         var data = _createData();
         data.last_build_status = -1;
