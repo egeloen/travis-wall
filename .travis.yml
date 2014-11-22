@@ -1,15 +1,12 @@
 language: node_js
 
-before_script:
+install:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
-    - ./node_modules/protractor/bin/webdriver-manager update
+    - node_modules/protractor/bin/webdriver-manager update
     - npm install grunt-cli -g
 
 script: grunt travis
-
-branches:
-    only: master
 
 notifications:
     email: geloen.eric@gmail.com
