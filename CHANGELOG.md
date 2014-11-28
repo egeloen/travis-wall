@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 1.0.3 (????-??-??)
+
+ * 3b79129 - Refine installation/test process
+
 ### 1.0.2 (2014-11-22)
 
  * 75349fa - Fix untracked repositories
