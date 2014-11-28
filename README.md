@@ -28,6 +28,7 @@ process and many other processes are managed by [Grunt](http://gruntjs.com/), a 
 [NodeJS](http://nodejs.org/):
 
 ``` bash
+$ npm install -g grunt-cli
 $ grunt dist
 ```
 

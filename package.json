@@ -1,10 +1,18 @@
 {
     "name": "travis-wall",
+    "version": "1.0.2",
+    "license" : "MIT",
+    "author": {
+        "name" : "Eric GELOEN",
+        "email" : "geloen.eric@gmail.com",
+        "url" : "http://egeloen.fr"
+    },
     "repository": {
         "type": "git",
         "url": "git://github.com/egeloen/travis-wall.git"
     },
     "devDependencies": {
+        "npm": "~1.4",
         "express": "~4.1",
         "protractor": "~1.4",
         "karma-jasmine": "~0.3",
@@ -22,6 +30,7 @@
         "grunt-contrib-watch": "~0.6",
         "grunt-contrib-jasmine": "~0.8",
         "grunt-ng-annotate": "~0.6",
+        "grunt-shell": "~1.0",
         "grunt-karma": "~0.9",
         "grunt-protractor-runner": "~1.1",
         "grunt-express-server": "~0.4"

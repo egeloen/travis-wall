@@ -137,6 +137,11 @@ module.exports = function(grunt) {
                 }
             }
         },
+        shell: {
+            webDriverManagerUpdate: {
+                command: 'node_modules/protractor/bin/webdriver-manager update'
+            }
+        },
         karma: {
             unit: {
                 options: {
@@ -166,6 +171,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-protractor-runner');
 
@@ -199,6 +205,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('test:e2e', [
+        'shell:webDriverManagerUpdate',
         'express:app',
         'protractor:e2e'
     ]);
