@@ -1,5 +1,15 @@
 # CHANGELOG
 
+### 1.0.4 (????-??-??)
+
+ * 495fc1f [Bower] Upgrade Angular to 1.6.1
+ * 40916d8 Add build timer
+ * cd4d3d7 Only use MomentJS in the view
+ * 84f821d [UX] Improve colors
+ * 44ad322 Prepare next major release
+ * f3966c9 Update Jasmine link
+ * b44c247 Update new year
+ 
 ### 1.0.3 (????-??-??)
 
  * 3b79129 - Refine installation/test process
