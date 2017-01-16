@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 1.0.4 (????-??-??)
+### 1.0.3 (2017-01-16)
 
  * 495fc1f [Bower] Upgrade Angular to 1.6.1
  * 40916d8 Add build timer
@@ -9,9 +9,6 @@
  * 44ad322 Prepare next major release
  * f3966c9 Update Jasmine link
  * b44c247 Update new year
- 
-### 1.0.3 (????-??-??)
-
  * 3b79129 - Refine installation/test process
 
 ### 1.0.2 (2014-11-22)
