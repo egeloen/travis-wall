@@ -3,7 +3,8 @@ describe('UserSpec', function () {
 
     var _user;
     var _username;
-    var _token;
+    var _publicToken;
+    var _privateToken;
     var _repositories;
 
     function _createData (slug) {
@@ -19,16 +20,18 @@ describe('UserSpec', function () {
 
     beforeEach(function () {
         _username = 'foo';
-        _token = 'bar';
+        _publicToken = 'bar';
+        _privateToken = 'baz';
         _repositories = _createCollection();
-        _user = new User(_username, _token, _repositories);
+        _user = new User(_username, _publicToken, _privateToken, _repositories);
     });
 
     it('should be able to init an empty user', function () {
         _user = new User();
 
-        expect(_user.username).toBe('');
-        expect(_user.token).toBe('');
+        expect(_user.username).toBe(undefined);
+        expect(_user.publicToken).toBe(undefined);
+        expect(_user.privateToken).toBe(undefined);
         expect(_user.repositories.length).toBe(0);
     });
 
@@ -42,14 +45,24 @@ describe('UserSpec', function () {
         expect(_user.username).toBe('bar');
     });
 
-    it('should be able to get the token', function () {
-        expect(_user.token).toBe(_token);
+    it('should be able to get the public token', function () {
+        expect(_user.publicToken).toBe(_publicToken);
     });
 
-    it('should be able to set the username', function () {
-        _user.token = 'foo';
+    it('should be able to set the public token', function () {
+        _user.publicToken = 'foo';
 
-        expect(_user.token).toBe('foo');
+        expect(_user.publicToken).toBe('foo');
+    });
+
+    it('should be able to get the private token', function () {
+        expect(_user.privateToken).toBe(_privateToken);
+    });
+
+    it('should be able to set the private token', function () {
+        _user.privateToken = 'foo';
+
+        expect(_user.privateToken).toBe('foo');
     });
 
     it('should be able to get the repositories', function () {

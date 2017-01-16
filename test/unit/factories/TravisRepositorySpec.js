@@ -6,10 +6,13 @@ describe('TravisRepositorySpec', function () {
     var _httpBackend;
 
     function _createData () {
-        return [ { slug: 'user/repository-1' }, { slug: 'user/repository-2' } ];
+        return [
+            { slug: 'user/repository-1' },
+            { slug: 'user/repository-2' }
+        ];
     }
 
-    function _createBuildedData (value) {
+    function _createPrivateData (value) {
         var _data = _createData();
 
         for (var key in _data) {
@@ -22,10 +25,7 @@ describe('TravisRepositorySpec', function () {
     beforeEach(function () {
         module('travis-wall');
 
-        _user = {
-            username: 'foo',
-            token: ''
-        };
+        _user = { username: 'foo' };
 
         inject(function (TravisRepository, $httpBackend) {
             _travisRepository = TravisRepository;
@@ -39,74 +39,38 @@ describe('TravisRepositorySpec', function () {
     });
 
     describe('API for public account', function () {
-        it('should be able to get repositories (starting by member)', function () {
-            _httpBackend
-                .when('GET', 'https://api.travis-ci.org/repos?member=foo')
-                .respond(_createData());
-
-            _travisRepository
-                .get(_user)
-                .then(function (repositories) {
-                    expect(repositories).toEqual(_createBuildedData(false));
-                });
-
-            _httpBackend.flush();
+        beforeEach(function () {
+            _user.publicToken = 'bar';
         });
 
-        it('should be able to get repositories (fallback on owner if there is no repos for the member)', function () {
+        it('should be able to get repositories', function () {
             _httpBackend
-                .when('GET', 'https://api.travis-ci.org/repos?member=foo')
-                .respond([]);
+                .when('GET', 'https://api.travis-ci.org/repos?member=foo', { Authorization: 'token bar' })
+                .respond(_createData());
 
             _httpBackend
-                .when('GET', 'https://api.travis-ci.org/repos?owner_name=foo')
+                .when('GET', 'https://api.travis-ci.org/repos?owner_name=foo', { Authorization: 'token bar' })
                 .respond(_createData());
 
             _travisRepository
                 .get(_user)
                 .then(function (repositories) {
-                    expect(repositories).toEqual(_createBuildedData(false));
+                    expect(repositories).toEqual(_createPrivateData(false).concat(_createPrivateData(false)));
                 });
 
             _httpBackend.flush();
         });
     });
 
-    describe('API for public/private account', function () {
+    describe('API for private account', function () {
         beforeEach(function () {
-            _user.token = 'bar';
+            _user.privateToken = 'bar';
         });
 
-        it('should be able to get repositories (starting by member)', function () {
-            _httpBackend
-                .when('GET', 'https://api.travis-ci.org/repos?member=foo')
-                .respond(_createData());
-
+        it('should be able to get repositories', function () {
             _httpBackend
                 .when('GET', 'https://api.travis-ci.com/repos?member=foo', { Authorization: 'token bar' })
                 .respond(_createData());
-
-            _travisRepository
-                .get(_user)
-                .then(function (repositories) {
-                    expect(repositories).toEqual(_createBuildedData(false).concat(_createBuildedData(true)));
-                });
-
-            _httpBackend.flush();
-        });
-
-        it('should be able to get repositories (fallback on owner if there is no repos for the member)', function () {
-            _httpBackend
-                .when('GET', 'https://api.travis-ci.org/repos?member=foo')
-                .respond([]);
-
-            _httpBackend
-                .when('GET', 'https://api.travis-ci.org/repos?owner_name=foo')
-                .respond(_createData());
-
-            _httpBackend
-                .when('GET', 'https://api.travis-ci.com/repos?member=foo', { Authorization: 'token bar' })
-                .respond([]);
 
             _httpBackend
                 .when('GET', 'https://api.travis-ci.com/repos?owner_name=foo', { Authorization: 'token bar' })
@@ -115,7 +79,44 @@ describe('TravisRepositorySpec', function () {
             _travisRepository
                 .get(_user)
                 .then(function (repositories) {
-                    expect(repositories).toEqual(_createBuildedData(false).concat(_createBuildedData(true)));
+                    expect(repositories).toEqual(_createPrivateData(true).concat(_createPrivateData(true)));
+                });
+
+            _httpBackend.flush();
+        });
+    });
+
+    describe('API for public / private account', function () {
+        beforeEach(function () {
+            _user.publicToken = 'bar';
+            _user.privateToken = 'baz';
+        });
+
+        it('should be able to get repositories', function () {
+            _httpBackend
+                .when('GET', 'https://api.travis-ci.org/repos?member=foo', { Authorization: 'token bar' })
+                .respond(_createData());
+
+            _httpBackend
+                .when('GET', 'https://api.travis-ci.org/repos?owner_name=foo', { Authorization: 'token bar' })
+                .respond(_createData());
+
+            _httpBackend
+                .when('GET', 'https://api.travis-ci.com/repos?member=foo', { Authorization: 'token baz' })
+                .respond(_createData());
+
+            _httpBackend
+                .when('GET', 'https://api.travis-ci.com/repos?owner_name=foo', { Authorization: 'token baz' })
+                .respond(_createData());
+
+            _travisRepository
+                .get(_user)
+                .then(function (repositories) {
+                    expect(repositories).toEqual(_createPrivateData(false).concat(
+                        _createPrivateData(false).concat(
+                            _createPrivateData(true).concat(_createPrivateData(true))
+                        )
+                    ));
                 });
 
             _httpBackend.flush();

@@ -1,36 +1,42 @@
-<input
-    id="travis-username"
-    name="username"
-    type="text"
-    placeholder="Travis username..."
-    autocomplete="off"
-    required
-    ng-model="user.username"
-/>
+<div>
+    <input
+        id="travis-username"
+        name="username"
+        type="text"
+        placeholder="Travis username..."
+        autocomplete="off"
+        ng-model="user.username"
+        ng-model-options="{ debounce: 500 }"
+        required
+    />
 
-<input
-    id="travis-token"
-    name="token"
-    type="password"
-    placeholder="Travis token..."
-    ng-model="user.token"
-/>
+    <input
+        id="travis-public-token"
+        name="publicToken"
+        type="password"
+        placeholder="Travis public token..."
+        ng-model="user.publicToken"
+        ng-model-options="{ debounce: 500 }"
+        ng-required="!user.privateToken"
+    />
 
-<span class="error" ng-show="loginForm.username.$dirty && loginForm.$error.travis">
-    It seems the username/token is not valid or there is simply no repository to monitor...
-</span>
+    <input
+        id="travis-private-token"
+        name="privateToken"
+        type="password"
+        placeholder="Travis private token..."
+        ng-model="user.privateToken"
+        ng-model-options="{ debounce: 500 }"
+        ng-required="!user.publicToken"
+    />
 
-<span class="process" ng-show="loginForm.username.$dirty && loginForm.$processing">
-    Checking...
-</span>
+    <button type="submit" ng-disabled="!form.$valid || form.$detection || form.$processing">
+        Monitor
+    </button>
 
-<span class="success" ng-show="loginForm.$valid && !loginForm.$detection && !loginForm.$processing">
-    Let's go!
-</span>
+    <br />
 
-<button
-    type="submit"
-    ng-show="loginForm.$valid && !loginForm.$detection && !loginForm.$processing"
->
-    Monitor
-</button>
+    <p class="error" ng-show="form.$dirty && form.$error.travis">
+        It seems the username / tokens are not valid or there is simply no repository to monitor...
+    </p>
+</div>

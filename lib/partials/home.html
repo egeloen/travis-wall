@@ -2,49 +2,67 @@
     <header>
         <h1>Travis Wall</h1>
         <em>
-            I'm a <a href="http://en.wikipedia.org/wiki/Software_as_a_service">SaaS</a> which gives you feedbacks about
-            your <a href="https://travis-ci.org/">Travis</a>!
+            I'm a <a target="_blank" href="http://en.wikipedia.org/wiki/Software_as_a_service">SaaS</a> which gives you
+            feedbacks about your <a target="_blank" href="https://travis-ci.org/">Travis</a>!
         </em>
     </header>
 
     <section id="content">
         <p>
             Hey everyone! I'm Travis Wall, an Open Source project firstly built to discover
-            <a href="http://angularjs.org/">AngularJS</a> to <a href="http://egeloen.fr/">Eric GELOEN</a> (my creator)
-            but at the end, I was so pretty and amazing than he has decided to make me discover the world!
+            <a target="_blank" href="http://angularjs.org/">AngularJS</a> to
+            <a target="_blank" href="http://egeloen.fr/">Eric GELOEN</a> (my creator) but at the end, I was so pretty
+            and amazing than he has decided to make me discover the world!
         </p>
 
         <h2>What's inside?</h2>
         <p>
             I was built around many technologies but the most important ones are:
-            <a href="http://angularjs.org/">AngularJS</a>, <a href="http://masonry.desandro.com/">Masonry</a>,
-            <a href="http://momentjs.com/">MomentJS</a>, <a href="http://lesscss.org/">Less</a>,
-            <a href="http://lesshat.com/">LessHat</a>,
-            <a href="http://necolas.github.io/normalize.css/">Normalize CSS</a>, <a href="http://bower.io/">Bower</a>,
-            <a href="http://gruntjs.com/">Grunt</a>, <a href="https://github.com/angular/protractor">Protractor</a>,
-            <a href="http://pivotal.github.io/jasmine/">Jasmine</a>, <a href="http://karma-runner.github.io/">Karma</a>
-            (just for the awesome), <a href="http://travis-ci.org/">Travis-CI</a> (obviously) and many others...
+            <a target="_blank" href="http://angularjs.org/">AngularJS</a>,
+            <a target="_blank" href="http://masonry.desandro.com/">Masonry</a>,
+            <a target="_blank" href="http://momentjs.com/">MomentJS</a>,
+            <a target="_blank" href="http://lesscss.org/">Less</a>,
+            <a target="_blank" href="http://lesshat.com/">LessHat</a>,
+            <a target="_blank" href="http://necolas.github.io/normalize.css/">Normalize CSS</a>,
+            <a target="_blank" href="http://bower.io/">Bower</a>,
+            <a target="_blank" href="http://gruntjs.com/">Grunt</a>,
+            <a target="_blank" href="https://github.com/angular/protractor">Protractor</a>,
+            <a target="_blank" href="http://pivotal.github.io/jasmine/">Jasmine</a>,
+            <a target="_blank" href="http://karma-runner.github.io/">Karma</a> (just for the awesome),
+            <a target="_blank" href="http://travis-ci.org/">Travis-CI</a> (obviously) and many others...
         </p>
 
-        <h2>Give me a try...</h2>
-        <p>Enter your Travis username and start monitoring your projects!</p>
+        <h2>How does I work?</h2>
+        <p>
+            Every 15 seconds, I made an HTTP request to the Travis API and update myself accordingly. Each calls to the
+            Travis API needs to be authenticated using a public token (for public repositories) and/or a private token
+            (for private repositories).
+        </p>
+        <p>
+            To generate your tokens, install the
+            <a target="_blank" href="https://github.com/travis-ci/travis.rb">Travis CLI tool</a> and use the following
+            commands:
+        </p>
+        <ul class="tips">
+            <li>Public Token: <code>travis login && travis token</code>.</li>
+            <li>Private Token: <code>travis login --pro && travis token --pro</code>.</li>
+        </ul>
+
+        <h2>Give me a try!</h2>
+        <p>Enter your Travis username / token(s) and start monitoring your projects!</p>
 
         <form name="loginForm" novalidate ng-submit="login()">
-            <div ng-travis-login></div>
+            <ng-travis-login user="user"></ng-travis-login>
         </form>
-
-        <p class="tip">
-            To get a token: <code>gem install travis && travis login --pro && travis token --pro</code>
-        </p>
 
         <h2>License</h2>
         <p>
             I'm released under the MIT license. For the full copyright and license information, please read the
-            <a href="https://github.com/egeloen/travis-wall/blob/master/LICENSE">LICENSE file</a> that was distributed
-            with the source code.
+            <a target="_blank" href="https://github.com/egeloen/travis-wall/blob/master/LICENSE">LICENSE file</a> that
+            was distributed with the source code.
         </p>
     </section>
 </div>
 
-<a class="github-ribbon github-ribbon-left" href="http://github.com/egeloen/travis-wall"></a>
-<a class="github-ribbon github-ribbon-right" href="http://github.com/egeloen/travis-wall"></a>
+<a class="github-ribbon github-ribbon-left" target="_blank" href="http://github.com/egeloen/travis-wall"></a>
+<a class="github-ribbon github-ribbon-right" target="_blank" href="http://github.com/egeloen/travis-wall"></a>

@@ -20,10 +20,40 @@ module.exports = function(grunt) {
         },
         copy: {
             app: {
-                files: [{
-                    src: [ 'public/favicon.ico' ],
-                    dest: 'dist/favicon.ico'
-                }]
+                files: [
+                    {
+                        src: 'public/favicon.ico',
+                        dest: 'dist/favicon.ico'
+                    },
+                    {
+                        src: 'public/index.html',
+                        dest: 'build/index.html'
+                    }
+                ]
+            },
+            e2e: {
+                files: [
+                    {
+                        src: 'bower_components/angular-mocks/angular-mocks.js',
+                        dest: 'dist/js/angular-mocks.js'
+                    },
+                    {
+                        src: 'public/index.html',
+                        dest: 'build/index.html'
+                    }
+                ]
+            }
+        },
+        processhtml: {
+            app: {
+                files: {
+                    'dist/index.html': 'build/index.html'
+                }
+            },
+            e2e: {
+                files: {
+                    'dist/index.html': 'build/index.html'
+                }
             }
         },
         htmlmin: {
@@ -39,7 +69,7 @@ module.exports = function(grunt) {
                     removeOptionalTags: true
                 },
                 files: {
-                    'dist/index.html': 'public/index.html',
+                    'dist/index.html': 'dist/index.html',
                     'dist/partials/home.html': 'lib/partials/home.html',
                     'dist/partials/travis-login.html': 'lib/partials/travis-login.html',
                     'dist/partials/wall.html': 'lib/partials/wall.html'
@@ -71,32 +101,39 @@ module.exports = function(grunt) {
         ngAnnotate: {
             app: {
                 src: [ 'lib/**/*.js' ],
+                dest: 'build/main.js'
+            }
+        },
+        concat: {
+            app: {
+                src: [
+                    'bower_components/jquery/dist/jquery.js',
+                    'bower_components/spin.js/spin.js',
+                    'bower_components/angular/angular.js',
+                    'bower_components/angular-route/angular-route.js',
+                    'bower_components/angular-spinner/angular-spinner.js',
+                    'bower_components/angular-masonry/angular-masonry.js',
+                    'bower_components/get-style-property/get-style-property.js',
+                    'bower_components/get-size/get-size.js',
+                    'bower_components/eventie/eventie.js',
+                    'bower_components/doc-ready/doc-ready.js',
+                    'bower_components/eventEmitter/EventEmitter.js',
+                    'bower_components/matches-selector/matches-selector.js',
+                    'bower_components/imagesloaded/imagesloaded.js',
+                    'bower_components/fizzy-ui-utils/utils.js',
+                    'bower_components/outlayer/item.js',
+                    'bower_components/outlayer/outlayer.js',
+                    'bower_components/masonry/dist/masonry.pkgd.js',
+                    'bower_components/momentjs/min/moment-with-locales.js',
+                    'build/main.js'
+                ],
                 dest: 'build/app.js'
             }
         },
         uglify: {
             app: {
                 files: {
-                    'dist/js/app.min.js': [
-                        'bower_components/jquery/dist/jquery.js',
-                        'bower_components/angular/angular.js',
-                        'bower_components/angular-route/angular-route.js',
-                        'bower_components/angular-spinner/angular-spinner.js',
-                        'bower_components/angular-masonry/angular-masonry.js',
-                        'bower_components/spin.js/spin.js',
-                        'bower_components/get-style-property/get-style-property.js',
-                        'bower_components/get-size/get-size.js',
-                        'bower_components/eventie/eventie.js',
-                        'bower_components/doc-ready/doc-ready.js',
-                        'bower_components/eventEmitter/EventEmitter.js',
-                        'bower_components/matches-selector/matches-selector.js',
-                        'bower_components/imagesloaded/imagesloaded.js',
-                        'bower_components/outlayer/item.js',
-                        'bower_components/outlayer/outlayer.js',
-                        'bower_components/masonry/dist/masonry.pkgd.js',
-                        'bower_components/momentjs/min/moment-with-locales.js',
-                        'build/app.js'
-                    ]
+                    'dist/js/app.min.js': 'build/app.js'
                 }
             }
         },
@@ -161,6 +198,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-ng-annotate');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-less');
@@ -171,6 +209,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-processhtml');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-protractor-runner');
@@ -178,14 +217,17 @@ module.exports = function(grunt) {
     grunt.registerTask('install', [ 'bower:install' ]);
 
     grunt.registerTask('build', [
+        'clean:build',
         'clean:dist',
-        'copy',
-        'htmlmin',
-        'less',
-        'imageEmbed',
-        'cssmin',
-        'ngAnnotate',
-        'uglify',
+        'copy:app',
+        'less:app',
+        'imageEmbed:app',
+        'ngAnnotate:app',
+        'concat:app',
+        'processhtml:app',
+        'htmlmin:app',
+        'cssmin:app',
+        'uglify:app',
         'clean:build'
     ]);
 
@@ -199,12 +241,21 @@ module.exports = function(grunt) {
         'watch'
     ]);
 
+    grunt.registerTask('dev', [
+        'dist',
+        'serve'
+    ]);
+
     grunt.registerTask('test:unit', [
         'jshint',
         'karma:unit'
     ]);
 
     grunt.registerTask('test:e2e', [
+        'copy:e2e',
+        'processhtml:e2e',
+        'htmlmin:app',
+        'clean:build',
         'shell:webDriverManagerUpdate',
         'express:app',
         'protractor:e2e'
