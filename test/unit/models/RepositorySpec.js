@@ -80,76 +80,54 @@ describe('RepositorySpec', function () {
     });
 
     it('should be able to get the build status errored', function () {
-        var data = _createData();
-        data.last_build_status = -1;
-
-        _repository.data = data;
+        _repository.data.last_build_status = -1;
 
         expect(_repository.buildStatusCode).toBe(_repository.BUILD_STATUS_CODE_ERRORED);
         expect(_repository.buildStatus).toBe('errored');
     });
 
     it('should be able to get the build status failed', function () {
-        var data = _createData();
-        data.last_build_status = 1;
-
-        _repository.data = data;
+        _repository.data.last_build_status = 1;
 
         expect(_repository.buildStatusCode).toBe(_repository.BUILD_STATUS_CODE_FAILED);
         expect(_repository.buildStatus).toBe('failed');
     });
 
     it('should be able to get the build status queued', function () {
-        var data = _createData();
-        data.last_build_status = -1;
-        data.last_build_started_at = null;
-        data.last_build_finished_at = null;
-
-        _repository.data = data;
+        _repository.data.last_build_status = -1;
+        _repository.data.last_build_started_at = null;
+        _repository.data.last_build_finished_at = null;
 
         expect(_repository.buildStatusCode).toBe(_repository.BUILD_STATUS_CODE_QUEUED);
         expect(_repository.buildStatus).toBe('queued');
     });
 
     it('should be able to get the build status building', function () {
-        var data = _createData();
-        data.last_build_status = -1;
-        data.last_build_finished_at = null;
-
-        _repository.data = data;
+        _repository.data.last_build_status = -1;
+        _repository.data.last_build_finished_at = null;
 
         expect(_repository.buildStatusCode).toBe(_repository.BUILD_STATUS_CODE_BUILDING);
         expect(_repository.buildStatus).toBe('building');
     });
 
     it('should be able to get the build status untracked', function () {
-        var data = _createData();
-        data.last_build_status = null;
-        data.last_build_id = null;
-
-        _repository.data = data;
+        _repository.data.last_build_status = null;
+        _repository.data.last_build_id = null;
 
         expect(_repository.buildStatusCode).toBe(_repository.BUILD_STATUS_CODE_UNTRACKED);
         expect(_repository.buildStatus).toBe('untracked');
     });
 
     it('should be able to get the build status unknown', function () {
-        var data = _createData();
-        data.last_build_status = -1;
-        data.last_build_started_at = null;
-
-        _repository.data = data;
+        _repository.data.last_build_status = -1;
+        _repository.data.last_build_started_at = null;
 
         expect(_repository.buildStatusCode).toBe(_repository.BUILD_STATUS_CODE_UNKNOWN);
         expect(_repository.buildStatus).toBe('unknown');
     });
 
     it('should be able to get the duration', function () {
-        expect(_repository.buildDuration.unix()).toBe(_data.last_build_duration);
-    });
-
-    it('should be able to get the human duration', function () {
-        expect(_repository.buildHumanDuration).toBe('a minute');
+        expect(_repository.buildDuration).toBe(_data.last_build_duration);
     });
 
     it('should be able to get the language', function () {
@@ -157,25 +135,11 @@ describe('RepositorySpec', function () {
     });
 
     it('should be able to get the started at', function () {
-        var timestamp = Math.round(_startedAt.getTime() / 1000);
-
-        expect(_repository.buildStartedAt.unix()).toBeGreaterThan(timestamp - 2);
-        expect(_repository.buildStartedAt.unix()).toBeLessThan(timestamp + 2);
-    });
-
-    it('should be able to get the human started at', function () {
-        expect(_repository.buildHumanStartedAt).toBe('2 minutes ago');
+        expect(_repository.buildStartedAt.getTime()).toBe(_startedAt.getTime());
     });
 
     it('should be able to get the finished at', function () {
-        var timestamp = Math.round(_finishedAt.getTime() / 1000);
-
-        expect(_repository.buildFinishedAt.unix()).toBeGreaterThan(timestamp - 2);
-        expect(_repository.buildFinishedAt.unix()).toBeLessThan(timestamp + 2);
-    });
-
-    it('should be able to get the human finished at', function () {
-        expect(_repository.buildHumanFinishedAt).toBe('a minute ago');
+        expect(_repository.buildFinishedAt.getTime()).toBe(_finishedAt.getTime());
     });
 
     it('should be able to get/set the data', function () {

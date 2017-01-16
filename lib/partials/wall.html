@@ -7,22 +7,39 @@
 >
     <div
         class="repository"
-        ng-repeat="repository in user.repositories | orderBy: [ '-buildStatusCode', '-buildFinishedAt.unix()' ] | filter: { buildStatusCode: '!' + 6 }"
+        ng-repeat="repository in user.repositories | orderBy: [ '-buildStatusCode', '-buildFinishedAt.getTime()' ] | filter: { buildStatusCode: '!' + 6 }"
         masonry-brick
     >
         <div class="repository-container repository-status-{{ repository.buildStatus }}">
             <div class="repository-title">
-                <a class="repository-number" href="{{ repository.buildUrl }}">#{{ repository.buildNumber }}</a>
-                <a class="repository-slug" href="{{ repository.travisUrl }}">{{ repository.slug }}</a>
+                <a
+                    class="repository-number"
+                    target="_blank"
+                    href="{{ repository.buildUrl }}"
+                >
+                    #{{ repository.buildNumber }}
+                </a>
+
+                <a
+                    class="repository-slug"
+                    target="_blank"
+                    href="{{ repository.travisUrl }}"
+                >
+                    {{ repository.slug }}
+                </a>
             </div>
 
-            <div class="repository-metadata" ng-show="repository.buildFinishedAt && repository.buildDuration">
-                <span class="repository-build-finished-at" >
-                    {{ repository.buildHumanFinishedAt }}
-                </span>
+            <div class="repository-metadata" ng-show="repository.buildFinishedAt || repository.buildDuration">
+                <span
+                    class="repository-build-finished-at"
+                    am-time-ago="repository.buildFinishedAt"
+                    ng-show="repository.buildFinishedAt"
+                ></span>
 
-                <span class="repository-build-duration">
-                    - {{ repository.buildHumanDuration }}
+                <span ng-show="repository.buildFinishedAt && repository.buildDuration">-</span>
+
+                <span class="repository-build-duration" ng-show="repository.buildDuration">
+                    {{ repository.buildDuration * 1000 | amDurationFormat }}
                 </span>
             </div>
 
@@ -47,7 +64,7 @@
                 <div class="repository-unknown">Unknown status</div>
             </div>
 
-            <a class="repository-github" href="{{ repository.githubUrl }}"></a>
+            <a class="repository-github" target="_blank" href="{{ repository.githubUrl }}"></a>
         </div>
     </div>
 
