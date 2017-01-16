@@ -8,7 +8,7 @@ describe('HomeControllerSpec', function () {
     var _button;
 
     beforeEach(function() {
-        browser.get('#/');
+        browser.get('#!/');
 
         _username = by.model('user.username');
         _publicToken = by.model('user.publicToken');
@@ -105,7 +105,7 @@ describe('HomeControllerSpec', function () {
         browser.findElement(_publicToken).sendKeys('public-token');
         browser.findElement(_button).click();
 
-        expect(browser.getCurrentUrl()).toContain('/#/egeloen?public-token=public-token');
+        expect(browser.getCurrentUrl()).toContain('/#!/egeloen?public-token=public-token');
     });
 
     it('should redirect the user on the wall if he clicks on the button (private token)', function () {
@@ -113,7 +113,7 @@ describe('HomeControllerSpec', function () {
         browser.findElement(_privateToken).sendKeys('private-token');
         browser.findElement(_button).click();
 
-        expect(browser.getCurrentUrl()).toContain('/#/egeloen?private-token=private-token');
+        expect(browser.getCurrentUrl()).toContain('/#!/egeloen?private-token=private-token');
     });
 
     it('should redirect the user on the wall if he clicks on the button (public / private token)', function () {
@@ -122,6 +122,6 @@ describe('HomeControllerSpec', function () {
         browser.findElement(_privateToken).sendKeys('private-token');
         browser.findElement(_button).click();
 
-        expect(browser.getCurrentUrl()).toContain('/#/egeloen?public-token=public-token&private-token=private-token');
+        expect(browser.getCurrentUrl()).toContain('/#!/egeloen?public-token=public-token&private-token=private-token');
     });
 });
