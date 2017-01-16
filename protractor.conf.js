@@ -51,3 +51,10 @@ exports.config = {
         });
     }
 };
+
+if (process.env.TRAVIS) {
+    exports.config.capabilities.chromeOptions = {
+        binary: './chrome-linux/chrome',
+        args: ['--no-sandbox']
+    };
+}
