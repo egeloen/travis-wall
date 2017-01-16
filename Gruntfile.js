@@ -108,11 +108,13 @@ module.exports = function(grunt) {
             app: {
                 src: [
                     'bower_components/jquery/dist/jquery.js',
+                    'bower_components/momentjs/min/moment-with-locales.js',
                     'bower_components/spin.js/spin.js',
                     'bower_components/angular/angular.js',
+                    'bower_components/angular-masonry/angular-masonry.js',
+                    'bower_components/angular-moment/angular-moment.js',
                     'bower_components/angular-route/angular-route.js',
                     'bower_components/angular-spinner/angular-spinner.js',
-                    'bower_components/angular-masonry/angular-masonry.js',
                     'bower_components/get-style-property/get-style-property.js',
                     'bower_components/get-size/get-size.js',
                     'bower_components/eventie/eventie.js',
@@ -124,7 +126,6 @@ module.exports = function(grunt) {
                     'bower_components/outlayer/item.js',
                     'bower_components/outlayer/outlayer.js',
                     'bower_components/masonry/dist/masonry.pkgd.js',
-                    'bower_components/momentjs/min/moment-with-locales.js',
                     'build/main.js'
                 ],
                 dest: 'build/app.js'
@@ -247,6 +248,10 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('test:unit', [
+        'copy:app',
+        'processhtml:app',
+        'htmlmin:app',
+        'clean:build',
         'jshint',
         'karma:unit'
     ]);
