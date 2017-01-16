@@ -54,7 +54,9 @@
                 class="repository-metadata"
                 ng-show="repository.buildStatusCode === repository.BUILD_STATUS_CODE_BUILDING"
             >
-                <div class="repository-building">Building...</div>
+                <div class="repository-building">
+                    Building since {{ repository.buildStartedAt | amDurationFormat }}
+                </div>
             </div>
 
             <div
