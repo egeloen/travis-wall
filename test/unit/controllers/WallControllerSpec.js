@@ -50,25 +50,41 @@ describe('WallControllerSpec', function () {
         _repositories = [ { slug: 'user/repository' } ];
     });
 
-    it('should init a user accoding to the username in the route parameters', function () {
+    it('should init a user according to the username / public token in the route parameters', function () {
         _routeParams.username = 'foo';
+        _routeParams['public-token'] = 'bar';
 
         _createController();
 
         expect(_scope.user).toBeDefined();
         expect(_scope.user.username).toBe('foo');
-        expect(_scope.user.token).toBe('');
+        expect(_scope.user.publicToken).toBe('bar');
+        expect(_scope.user.privateToken).toBe(undefined);
     });
 
-    it('should init a user accoding to the username/token in the route parameters', function () {
+    it('should init a user according to the username / private token in the route parameters', function () {
         _routeParams.username = 'foo';
-        _routeParams.token = 'bar';
+        _routeParams['private-token'] = 'bar';
 
         _createController();
 
         expect(_scope.user).toBeDefined();
         expect(_scope.user.username).toBe('foo');
-        expect(_scope.user.token).toBe('bar');
+        expect(_scope.user.privateToken).toBe('bar');
+        expect(_scope.user.publicToken).toBe(undefined);
+    });
+
+    it('should init a user according to the username / public token / private token in the route parameters', function () {
+        _routeParams.username = 'foo';
+        _routeParams['public-token'] = 'bar';
+        _routeParams['private-token'] = 'baz';
+
+        _createController();
+
+        expect(_scope.user).toBeDefined();
+        expect(_scope.user.username).toBe('foo');
+        expect(_scope.user.publicToken).toBe('bar');
+        expect(_scope.user.privateToken).toBe('baz');
     });
 
     it('should init the user repositories if there are ones', function () {
@@ -90,7 +106,7 @@ describe('WallControllerSpec', function () {
         expect(_location.path()).toBe('/');
     });
 
-    it('should redirect the user to the homepage if an error occured', function () {
+    it('should redirect the user to the homepage if an error occurred', function () {
         _travisRepositoryState = false;
         _createController();
 

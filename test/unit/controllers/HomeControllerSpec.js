@@ -46,23 +46,27 @@ describe('HomeControllerSpec', function () {
         expect(_scope.user).toBeDefined();
     });
 
-    it('should redirect user on the wall if the username have repositories', function () {
+    it('should redirect user on the wall if the username / public token have repositories', function () {
         _createController();
 
         _scope.user.username = 'foo';
+        _scope.user.publicToken = 'bar';
 
         _scope.login();
         _scope.$digest();
 
         expect(_travisRepository.get).toHaveBeenCalledWith(_scope.user);
         expect(_location.path()).toBe('/foo');
+
+        expect(_location.search()['public-token']).toBeDefined();
+        expect(_location.search()['public-token']).toBe('bar');
     });
 
-    it('should redirect user on the wall if the username/token have repositories', function () {
+    it('should redirect user on the wall if the username / private token have repositories', function () {
         _createController();
 
         _scope.user.username = 'foo';
-        _scope.user.token = 'bar';
+        _scope.user.privateToken = 'bar';
 
         _scope.login();
         _scope.$digest();
@@ -71,8 +75,29 @@ describe('HomeControllerSpec', function () {
 
         expect(_location.path()).toBe('/foo');
 
-        expect(_location.search().token).toBeDefined();
-        expect(_location.search().token).toBe('bar');
+        expect(_location.search()['private-token']).toBeDefined();
+        expect(_location.search()['private-token']).toBe('bar');
+    });
+
+    it('should redirect user on the wall if the username / public token / private token have repositories', function () {
+        _createController();
+
+        _scope.user.username = 'foo';
+        _scope.user.publicToken = 'bar';
+        _scope.user.privateToken = 'baz';
+
+        _scope.login();
+        _scope.$digest();
+
+        expect(_travisRepository.get).toHaveBeenCalledWith(_scope.user);
+
+        expect(_location.path()).toBe('/foo');
+
+        expect(_location.search()['public-token']).toBeDefined();
+        expect(_location.search()['public-token']).toBe('bar');
+
+        expect(_location.search()['private-token']).toBeDefined();
+        expect(_location.search()['private-token']).toBe('baz');
     });
 
     it('should not redirect user on the wall if the username have no repositories', function () {
@@ -80,6 +105,8 @@ describe('HomeControllerSpec', function () {
         _createController();
 
         _scope.user.username = 'foo';
+        _scope.user.publicToken = 'public-token';
+        _scope.user.privateToken = 'private-token';
 
         _scope.login();
         _scope.$digest();
