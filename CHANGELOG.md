@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 1.0.4 (????-??-??)
+
+ * ee2bd27 - Remove strict comparisons which are buggy
+ 
 ### 1.0.3 (2017-01-16)
 
  * 495fc1f [Bower] Upgrade Angular to 1.6.1
