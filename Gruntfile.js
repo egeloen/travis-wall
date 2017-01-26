@@ -31,7 +31,7 @@ module.exports = function(grunt) {
                     }
                 ]
             },
-            e2e: {
+            mock: {
                 files: [
                     {
                         src: 'bower_components/angular-mocks/angular-mocks.js',
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
                     'dist/index.html': 'build/index.html'
                 }
             },
-            e2e: {
+            mock: {
                 files: {
                     'dist/index.html': 'build/index.html'
                 }
@@ -251,8 +251,8 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('test:unit', [
-        'copy:app',
-        'processhtml:app',
+        'copy:mock',
+        'processhtml:mock',
         'htmlmin:app',
         'clean:build',
         'jshint',
@@ -260,8 +260,8 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('test:e2e', [
-        'copy:e2e',
-        'processhtml:e2e',
+        'copy:mock',
+        'processhtml:mock',
         'htmlmin:app',
         'clean:build',
         'shell:webDriverManagerUpdate',

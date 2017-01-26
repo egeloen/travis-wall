@@ -3,8 +3,8 @@ module.exports = function(config) {
 
     config.set({
         files: [
-            'dist/**/*.js',
-            'bower_components/angular-mocks/angular-mocks.js',
+            'dist/js/app.min.js',
+            'dist/js/angular-mocks.js',
             'test/unit/**/*Spec.js'
         ],
         plugins: [ 'karma-jasmine', 'karma-phantomjs-launcher' ],
