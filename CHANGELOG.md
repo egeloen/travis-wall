@@ -2,6 +2,7 @@
 
 ### 1.0.4 (????-??-??)
 
+ * 774e9e3 - [Test] Fix angular-mocks injected multiple times in Karma
  * ee2bd27 - Remove strict comparisons which are buggy
  
 ### 1.0.3 (2017-01-16)
